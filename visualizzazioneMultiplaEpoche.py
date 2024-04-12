@@ -1,0 +1,221 @@
+import json
+
+import matplotlib.pyplot as plt
+import numpy as np
+
+dati = ''
+
+file_uno = '/home/matteo/Documenti/tesi/grafici3/att/reward_mosse_Att_PPO_0_0.txt'
+file_due = '/home/matteo/Documenti/tesi/grafici3/att/reward_mosse_Att_PPO_0_0-1.txt'
+file_tre = '/home/matteo/Documenti/tesi/grafici3/att/reward_mosse_Att_PPO_0_0-3.txt'
+file_quattro = '/home/matteo/Documenti/tesi/grafici3/att/reward_mosse_Att_PPO_0_0-7.txt'
+file_cinque = '/home/matteo/Documenti/tesi/grafici3/att/reward_mosse_Att_PPO_0_0-7,10-17.txt'
+
+
+
+#with open(pathCompleto, "r") as file:
+with open(file_uno, "r") as file:
+    dati = file.read()
+dati_dict = json.loads(dati)
+
+# reward per epoca
+app = dati_dict['attaccante']
+bpp = dati_dict['difensore']
+
+yA = []
+yB = []
+tempo = []
+
+aPPEND = 0
+bPPEND = 0
+sommaTempo = 0
+
+count = 0
+for i in range(len(app)):
+    aPPEND += app[i][1]
+    bPPEND += bpp[i][1]
+    sommaTempo = bpp[i][2]
+
+    count +=1
+    if count == 10:
+        count = 0
+
+        yA.append(aPPEND/10)
+        yB.append(bPPEND/10)
+        tempo.append(sommaTempo)
+        aPPEND = 0
+        bPPEND = 0
+        
+
+# Crea il grafico
+fig, ax = plt.subplots()
+plt.plot(np.arange(len(yA)),[-1.4 for i in range(len(yA))],label='ottimo' , color='orange')
+plt.ylim(-4,0)
+
+
+
+ax.plot(np.arange(len(yA)),yA,label = '0',color="green")
+
+ax.set_xlabel('epoche')
+
+plt.ylabel('reward')
+
+
+#-------------------------------------------------------------------------------------------------------------------------
+
+with open(file_due, "r") as file:
+    dati = file.read()
+dati_dict = json.loads(dati)
+
+# reward per epoca
+app = dati_dict['attaccante']
+bpp = dati_dict['difensore']
+""" print('APP:',app)
+print('BPP:',bpp) """
+
+yA = []
+yB = []
+tempo = []
+
+aPPEND = 0
+bPPEND = 0
+sommaTempo = 0
+
+count = 0
+for i in range(len(app)):
+    aPPEND += app[i][1]
+    bPPEND += bpp[i][1]
+    sommaTempo = bpp[i][2]
+
+    count +=1
+    if count == 10:
+        count = 0
+
+        yA.append(aPPEND/10)
+        yB.append(bPPEND/10)
+        tempo.append(sommaTempo)
+        aPPEND = 0
+        bPPEND = 0
+        
+
+ax.plot(np.arange(len(yA)),yA,label='0-1', color= "yellow")
+
+#-------------------------------------------------------------------------------------------------------------------------
+
+with open(file_tre, "r") as file:
+    dati = file.read()
+dati_dict = json.loads(dati)
+
+# reward per epoca
+app = dati_dict['attaccante']
+bpp = dati_dict['difensore']
+
+yA = []
+yB = []
+tempo = []
+
+aPPEND = 0
+bPPEND = 0
+sommaTempo = 0
+
+count = 0
+for i in range(len(app)):
+    aPPEND += app[i][1]
+    bPPEND += bpp[i][1]
+    sommaTempo = bpp[i][2]
+
+    count +=1
+    if count == 10:
+        count = 0
+
+        yA.append(aPPEND/10)
+        yB.append(bPPEND/10)
+        tempo.append(sommaTempo)
+        aPPEND = 0
+        bPPEND = 0
+        
+
+ax.plot(np.arange(len(yA)),yA, label = '0-3',color= "black")
+
+#-------------------------------------------------------------------------------------------------------------------------
+
+
+with open(file_quattro, "r") as file:
+    dati = file.read()
+dati_dict = json.loads(dati)
+
+# reward per epoca
+app = dati_dict['attaccante']
+bpp = dati_dict['difensore']
+
+
+yA = []
+yB = []
+tempo = []
+
+aPPEND = 0
+bPPEND = 0
+sommaTempo = 0
+
+count = 0
+for i in range(len(app)):
+    aPPEND += app[i][1]
+    bPPEND += bpp[i][1]
+    sommaTempo = bpp[i][2]
+
+    count +=1
+    if count == 10:
+        count = 0
+
+        yA.append(aPPEND/10)
+        yB.append(bPPEND/10)
+        tempo.append(sommaTempo)
+        aPPEND = 0
+        bPPEND = 0
+        
+
+ax.plot(np.arange(len(yA)),yA,label='0-7' ,color= "purple")
+
+
+#-------------------------------------------------------------------------------------------------------------------------
+
+
+with open(file_cinque, "r") as file:
+    dati = file.read()
+dati_dict = json.loads(dati)
+
+# reward per epoca
+app = dati_dict['attaccante']
+bpp = dati_dict['difensore']
+
+
+yA = []
+yB = []
+tempo = []
+
+aPPEND = 0
+bPPEND = 0
+sommaTempo = 0
+
+count = 0
+for i in range(len(app)):
+    aPPEND += app[i][1]
+    bPPEND += bpp[i][1]
+    sommaTempo = bpp[i][2]
+
+    count +=1
+    if count == 10:
+        count = 0
+
+        yA.append(aPPEND/10)
+        yB.append(bPPEND/10)
+        tempo.append(sommaTempo)
+        aPPEND = 0
+        bPPEND = 0
+        
+
+ax.plot(np.arange(len(yA)),yA, label = '0-7,10-17',color= "gray")
+
+
+plt.legend()
+plt.show()
